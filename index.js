@@ -56,6 +56,10 @@ class BinaryTree extends Object {
     let self = this;
     return this.keys().map(k => [k, self[k]]);
   }
+
+  hasKey(value) {
+    return this.keys().filter(k => value == k).length > 0;
+  }
 }
 
 assert.ok((new BinaryTree()) instanceof BinaryTree);
@@ -77,3 +81,5 @@ for (let k in bt) {
 for (let pair of bt.iteritems()) {
   assert.ok(pair.length === 2);
 }
+assert.ok(bt.hasKey(4));
+assert.ok(!bt.hasKey(5));
