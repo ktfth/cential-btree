@@ -83,3 +83,5 @@ for (let pair of bt.iteritems()) {
 }
 assert.ok(bt.hasKey(4));
 assert.ok(!bt.hasKey(5));
+assert.ok(1 in bt);
+assert.ok(!(5 in bt));
