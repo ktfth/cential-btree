@@ -37,6 +37,18 @@ class BinaryTree extends Array {
     }
     return out;
   }
+
+  minKey(base) {
+    let out = null;
+    if (base !== undefined) {
+      return this.keys().filter(k => k == Math.round(base))[0];
+    }
+    this.keys().forEach((k, i) => {
+      if (out === null) out = k;
+      out = Math.min(out, k);
+    });
+    return out;
+  }
 }
 
 assert.ok((new BinaryTree()) instanceof BinaryTree);
@@ -50,3 +62,5 @@ assert.deepEqual(bt.keys(2), [3, 4]);
 assert.deepEqual(bt.values(), ['bee', 'gnu', 'tiger', 'elephant']);
 assert.deepEqual(bt.values(1, 3), ['gnu', 'tiger']);
 assert.deepEqual(bt.values(2), ['tiger', 'elephant']);
+assert.equal(bt.minKey(), 1);
+assert.equal(bt.minKey(1.5), 2);
