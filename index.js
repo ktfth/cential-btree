@@ -51,6 +51,11 @@ class BinaryTree extends Object {
     });
     return out;
   }
+
+  iteritems() {
+    let self = this;
+    return this.keys().map(k => [k, self[k]]);
+  }
 }
 
 assert.ok((new BinaryTree()) instanceof BinaryTree);
@@ -68,4 +73,7 @@ assert.equal(bt.minKey(), 1);
 assert.equal(bt.minKey(1.5), 2);
 for (let k in bt) {
   assert.ok(['1', '2', '3', '4'].indexOf(k) > -1);
+}
+for (let pair of bt.iteritems()) {
+  assert.ok(pair.length === 2);
 }
