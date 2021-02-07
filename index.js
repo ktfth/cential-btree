@@ -1,7 +1,7 @@
 'use strict';
 const assert = require('assert');
 
-class BinaryTree extends Array {
+class BinaryTree extends Object {
   constructor() {
     super();
   }
@@ -9,12 +9,14 @@ class BinaryTree extends Array {
   update(data) {
     let self = this;
     if (typeof(data) === 'object') {
-      Object.keys(data).forEach(k => self[k] = data[k]);
+      for (let k in data) {
+        self[k] = data[k];
+      }
     }
     return self;
   }
 
-  len() {
+  length() {
     return Object.keys(this).length;
   }
 
@@ -54,7 +56,7 @@ class BinaryTree extends Array {
 assert.ok((new BinaryTree()) instanceof BinaryTree);
 let bt = new BinaryTree();
 bt.update({ 1: 'bee', 2: 'gnu', 3: 'tiger', 4: 'elephant' });
-assert.equal(bt.len(), 4);
+assert.equal(bt.length(), 4);
 assert.equal(bt[1], 'bee');
 assert.deepEqual(bt.keys(), [1, 2, 3, 4]);
 assert.deepEqual(bt.keys(1, 3), [2, 3]);
@@ -64,3 +66,6 @@ assert.deepEqual(bt.values(1, 3), ['gnu', 'tiger']);
 assert.deepEqual(bt.values(2), ['tiger', 'elephant']);
 assert.equal(bt.minKey(), 1);
 assert.equal(bt.minKey(1.5), 2);
+for (let k in bt) {
+  assert.ok(['1', '2', '3', '4'].indexOf(k) > -1);
+}
